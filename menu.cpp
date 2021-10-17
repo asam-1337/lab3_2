@@ -52,8 +52,7 @@ void d_add_contact(PCB &plate)
     get_num(cnt.x);
     cout << "enter y: ";
     get_num(cnt.y);
-    if (plate + cnt)
-        cout << "contact doesnt add" << endl;
+    plate += cnt;
 }
 
 void d_select_group(PCB plate)

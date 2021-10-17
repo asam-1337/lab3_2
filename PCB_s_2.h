@@ -20,6 +20,9 @@ namespace PCB_1 {
             x = 0;
             y = 0;
         }
+
+        explicit contact(bool v_type, int v_x = 1, int v_y = 1)
+                : exist (true), type(v_type), connect(-1), x(v_x), y(v_y) {}
     };
 
     class PCB {
@@ -35,7 +38,7 @@ namespace PCB_1 {
 
         int create_contact(bool type, double x, double y);
         int establish_connect(int name1, int name2);
-        int operator +(const contact & src);// +=
+        PCB & operator += (const contact & src);
         int correction_check(int name1, int name2);
         int get_track_length(int name1, int name2);
         PCB & select_group(int type);

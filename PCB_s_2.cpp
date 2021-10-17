@@ -4,6 +4,7 @@
 
 #include "PCB_s_2.h"
 #include <cmath>
+#include <stdexcept>
 
 namespace PCB_1
 {
@@ -31,22 +32,21 @@ namespace PCB_1
             }
         return 1;
     }
-    int PCB::operator + (const contact &src)
+    PCB & PCB::operator += (const contact &src)
     {
         if (curr_sz < sz)
         {
-
             arr[curr_sz++] = src;
-            return 0;
+            return *this;
         }
-        return 1;
+        throw s;
+
     }
 
     int PCB::correction_check(int name1, int name2)
     {
         if (arr[name1].exist && arr[name2].exist)
-            if ((arr[name1].type && !arr[name2].type)
-                || (!arr[name1].type && arr[name2].type))
+            if (arr[name1].type != arr[name2].type)
                 return 0;
         return 1;
 
@@ -58,7 +58,9 @@ namespace PCB_1
         {
             std::cout
             << "d = "
-            << sqrt(pow(arr[name1].x - arr[name2].x,2) + pow(arr[name1].x - arr[name2].y, 2));
+            << sqrt((arr[name1].x - arr[name2].x) * (arr[name1].x - arr[name2].x)
+            +
+            (arr[name1].x - arr[name2].y) * (arr[name1].x - arr[name2].y));
             return 0;
         }
         return 1;
@@ -78,7 +80,7 @@ namespace PCB_1
         return plate;
     }
 
-    std::ostream & operator << (std::ostream& buff, const PCB & plate){
+    std::ostream & operator << (std::ostream & buff, const PCB & plate){
         buff << "number\t|\ttype\t|\tconnect\t|\tcoords" << std:: endl;
         for (int i = 0; plate.arr[i].exist && i < plate.sz; i++)
         {
