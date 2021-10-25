@@ -42,8 +42,8 @@ namespace PCB_1 {
         int correction_check(int name1, int name2);
         int get_track_length(int name1, int name2);
         PCB & select_group(int type);
-        friend std::ostream & operator << (std::ostream& buff, const PCB & plate);
-        //преобразование типов в и из класса в число
+        friend std::ostream & operator << (std::ostream & buff, const PCB & plate);
+        friend std::istream & operator >> (std::istream & buff, PCB & plate);
     };
 }
 

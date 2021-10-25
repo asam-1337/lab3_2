@@ -39,7 +39,7 @@ namespace PCB_1
             arr[curr_sz++] = src;
             return *this;
         }
-        throw s;
+        throw std::runtime_error("plate is overflow");
 
     }
 
@@ -91,6 +91,20 @@ namespace PCB_1
                     << "\t\t|\t" << "(" << plate.arr[i].x << ", " << plate.arr[i].y << ")"
                     << std::endl;
         }
+        return buff;
+    }
+    std::istream & operator >> (std::istream & buff, PCB & plate)
+    {
+        if (plate.curr_sz < plate.sz) {
+            plate.arr[plate.curr_sz].exist = true;
+            buff >> plate.arr[plate.curr_sz].type;
+            std::cout << "enter x";
+            std::cin >> plate.arr[plate.curr_sz].x;
+            std::cout << "enter y";
+            std::cin >> plate.arr[plate.curr_sz].y;
+            plate.curr_sz++;
+        }
+
         return buff;
     }
 }

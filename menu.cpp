@@ -30,16 +30,8 @@ void d_create_PCB(PCB & plate, int size)
 
 void d_create_contact(PCB &plate)
 {
-    bool type;
-    double x, y;
     cout << "enter type: ";
-    get_num(type);
-    cout << "enter x: ";
-    get_num(x);
-    cout << "enter y: ";
-    get_num(y);
-    if (plate.create_contact(type, x, y))
-        cout << "contact doesnt create" << endl;
+    cin >> plate;
 }
 
 void d_add_contact(PCB &plate)
